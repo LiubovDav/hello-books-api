@@ -1,8 +1,8 @@
-"""adds Book model
+"""Recreate model migrations
 
-Revision ID: 4b8a234d2575
+Revision ID: 29ad81bacf9b
 Revises: 
-Create Date: 2024-10-28 17:18:02.157168
+Create Date: 2024-10-28 18:47:30.645313
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4b8a234d2575'
+revision = '29ad81bacf9b'
 down_revision = None
 branch_labels = None
 depends_on = None
