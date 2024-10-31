@@ -23,7 +23,17 @@ def create_book():
 
 @books_bp.get("")
 def get_all_books():
-    query = db.select(Book).order_by(Book.id)
+    query = db.select(Book)
+
+    title_param = request.args.get("title")
+    if title_param:
+        query = query.where(Book.title.ilike(f"%{title_param}%"))
+
+    description_param = request.args.get("description")
+    if description_param:
+        query = query.where(Book.description.ilike(f"%{description_param}%"))
+
+    query = query.order_by(Book.id)
     books = db.session.scalars(query)
     # We could also write the line above as:
     # books = db.session.execute(query).scalars()
@@ -84,26 +94,26 @@ def delete_book(book_id):
 
     return Response(status=204, mimetype="application/json")
 
-# @books_bp.post("/many")
-# def create_books():
-#     request_body = request.get_json()
-#     response = []
+@books_bp.post("/many")
+def create_books():
+    request_body = request.get_json()
+    response = []
 
-#     for book in request_body:
-#         title = book["title"]
-#         description = book["description"]
+    for book in request_body:
+        title = book["title"]
+        description = book["description"]
 
-#         new_book = Book(title=title, description=description)
-#         db.session.add(new_book)
-#         db.session.commit()
+        new_book = Book(title=title, description=description)
+        db.session.add(new_book)
+        db.session.commit()
 
-#         response.append({
-#             "id": new_book.id,
-#             "title": new_book.title,
-#             "description": new_book.description
-#         })
+        response.append({
+            "id": new_book.id,
+            "title": new_book.title,
+            "description": new_book.description
+        })
 
-#     return response, 201
+    return response, 201
 
 # @books_bp.get("")
 # def get_all_books():
