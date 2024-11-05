@@ -1,8 +1,8 @@
 """Recreate model migrations
 
-Revision ID: 29ad81bacf9b
+Revision ID: f8bef3c8322c
 Revises: 
-Create Date: 2024-10-28 18:47:30.645313
+Create Date: 2024-11-04 18:00:20.666338
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '29ad81bacf9b'
+revision = 'f8bef3c8322c'
 down_revision = None
 branch_labels = None
 depends_on = None
