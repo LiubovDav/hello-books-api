@@ -1,10 +1,19 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from ..db import db
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import ForeignKey
+from typing import Optional
+from ..db import db
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from .author import Author
 
 class Book(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     title: Mapped[str]
     description: Mapped[str]
+    # author_id: Mapped[Optional[int]] = mapped_column(ForeignKey("author.id"))
+    # author:  Mapped[Optional["Author"]] = relationship(back_populates="books")
 
     def to_dict(self):
         book_as_dict = {}
@@ -20,7 +29,6 @@ class Book(db.Model):
                        description=book_data["description"])
 
         return new_book
-
 
 
 
